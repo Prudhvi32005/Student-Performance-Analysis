@@ -1,0 +1,87 @@
+{% extends "base.html" %}
+
+{% block title %}AI Analysis - Student AI Performance Analytics{% endblock %}
+
+{% block content %}
+<div class="top-bar">
+    <div class="page-title">
+        <h1>AI Performance Analysis</h1>
+        <p>Interactive statistical models, correlation matrices, and predictive trends mapping AI usage vs grades</p>
+    </div>
+    
+    <div class="top-actions">
+        <a href="{{ url_for('dashboard') }}" class="btn btn-secondary">
+            <svg style="width:16px;height:16px;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="19" y1="12" x2="5" y2="12"></line>
+                <polyline points="12 19 5 12 12 5"></polyline>
+            </svg>
+            Back to Dashboard
+        </a>
+    </div>
+</div>
+
+<!-- Visual plots grid -->
+<div class="plot-grid">
+    <div class="plot-card">
+        <h3 style="margin-bottom: 0.75rem; font-weight: 700; color: var(--text-primary);">1. Grade Distribution Analysis</h3>
+        <div class="plot-container">
+            <img class="plot-img" src="{{ url_for('static', filename='images/grade_distribution.png') }}" alt="Grade Distribution">
+        </div>
+        <p class="plot-description">
+            Shows a normal distribution of Final Exam Scores centered around the mean ({{ stats.avg_exam_score }}%). The smooth Kernel Density Estimate (KDE) curve highlights cohort density distribution patterns.
+        </p>
+    </div>
+    
+    <div class="plot-card">
+        <h3 style="margin-bottom: 0.75rem; font-weight: 700; color: var(--text-primary);">2. AI Tool Usage vs. Exam Performance</h3>
+        <div class="plot-container">
+            <img class="plot-img" src="{{ url_for('static', filename='images/ai_usage_vs_score.png') }}" alt="AI Usage vs Exam Performance">
+        </div>
+        <p class="plot-description">
+            A scatter plot fitted with a <strong>quadratic regression trendline</strong>. Notice the non-linear relationship: moderate AI usage yields a positive boost in performance, but extreme usage (>12 hours/week) leads to steep grade degradation due to over-reliance.
+        </p>
+    </div>
+    
+    <div class="plot-card">
+        <h3 style="margin-bottom: 0.75rem; font-weight: 700; color: var(--text-primary);">3. Correlation Matrix (Heatmap)</h3>
+        <div class="plot-container">
+            <img class="plot-img" src="{{ url_for('static', filename='images/correlation_heatmap.png') }}" alt="Correlation Heatmap">
+        </div>
+        <p class="plot-description">
+            A Pearson correlation matrix displaying factors influencing grades. The coefficient between Final Exam Score and Study Hours is <strong style="color:#6366f1">{{ stats.correlation_score_study }}</strong>, while the coefficient with AI usage stands at <strong style="color:{% if stats.correlation_score_ai > 0 %}#34d399{% else %}#f87171{% endif %}">{{ stats.correlation_score_ai }}</strong>.
+        </p>
+    </div>
+    
+    <div class="plot-card">
+        <h3 style="margin-bottom: 0.75rem; font-weight: 700; color: var(--text-primary);">4. Performance by AI Usage Category</h3>
+        <div class="plot-container">
+            <img class="plot-img" src="{{ url_for('static', filename='images/ai_type_performance.png') }}" alt="Performance by Category">
+        </div>
+        <p class="plot-description">
+            Box-and-whisker distribution plot. Students engaging primarily in <strong>Concept Explanations</strong> and <strong>Coding Assistance</strong> perform significantly higher than those using AI purely for <strong>Summarization</strong> or "No Usage" control groups.
+        </p>
+    </div>
+</div>
+
+<!-- Detailed Insights Card -->
+<div class="card">
+    <div class="card-header">
+        <h2 class="card-title">Key Academic Findings & Methodology Brief</h2>
+    </div>
+    <div style="line-height: 1.6; display: flex; flex-direction: column; gap: 1.25rem;">
+        <div>
+            <h4 style="color: var(--color-purple); font-weight: 700; margin-bottom: 0.25rem;">The AI Curve Hypothesis (Quadratic Decay)</h4>
+            <p style="color: var(--text-secondary); font-size: 0.95rem;">
+                Through regression fitting, we modeled the non-linear relationship of AI engagement hours on cognitive outcomes. The equation dictates that learning support tools act as positive cognitive scaffolds up to a threshold of 10-12 hours per week. Beyond this apex, the slope turns negative. The drop correlates with "outsourced learning" where students generate solutions without mental synthesis.
+            </p>
+        </div>
+        
+        <div>
+            <h4 style="color: var(--color-success); font-weight: 700; margin-bottom: 0.25rem;">Variable Importances and Multicollinearity</h4>
+            <p style="color: var(--text-secondary); font-size: 0.95rem;">
+                Traditional study hours and prior GPA remain high anchors of academic success. Although AI usage offers a minor leverage point, a student's underlying study habits are a prerequisite. The correlation matrix suggests that students with high GPAs tend to use AI more effectively (correlation coefficient of GPA with Concept Explanations and Coding), utilizing the tools as expert tutors rather than short-cut generators.
+            </p>
+        </div>
+    </div>
+</div>
+{% endblock %}

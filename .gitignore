@@ -1,0 +1,25 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Databases
+users.db
+*.db
+*.sqlite
+
+# Environments
+.venv/
+venv/
+ENV/
+env/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# User data / uploaded data
+data/uploads/
+data/*.csv
+test_data.csv
+test_student.csv

@@ -1,0 +1,117 @@
+{% extends "base.html" %}
+
+{% block title %}Dashboard - Student AI Performance Analytics{% endblock %}
+
+{% block content %}
+<div class="top-bar">
+    <div class="page-title">
+        <h1>Analytical Dashboard</h1>
+        <p>Real-time analytics of student outcomes and generative AI integration metrics</p>
+    </div>
+    
+    <div class="top-actions">
+        <button id="run-analysis-btn" class="btn btn-secondary">
+            <svg style="width:16px;height:16px;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67"></path>
+            </svg>
+            Regenerate Data
+        </button>
+        <a href="{{ url_for('analysis') }}" class="btn btn-primary">
+            <svg style="width:16px;height:16px;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="18" y1="20" x2="18" y2="10"></line>
+                <line x1="12" y1="20" x2="12" y2="4"></line>
+                <line x1="6" y1="20" x2="6" y2="14"></line>
+            </svg>
+            View Visual Analysis
+        </a>
+    </div>
+</div>
+
+<!-- KPI Indicators -->
+<div class="kpi-grid">
+    <div class="kpi-card">
+        <div class="kpi-header">
+            <span class="kpi-title">Total Cohort</span>
+            <div class="kpi-icon">👥</div>
+        </div>
+        <div class="kpi-value">{{ stats.total_students }}</div>
+        <span class="kpi-desc">Total active sample size</span>
+    </div>
+    
+    <div class="kpi-card">
+        <div class="kpi-header">
+            <span class="kpi-title">Average Exam Score</span>
+            <div class="kpi-icon">🎓</div>
+        </div>
+        <div class="kpi-value">{{ stats.avg_exam_score }}%</div>
+        <span class="kpi-desc">Cohort mean grade standard</span>
+    </div>
+    
+    <div class="kpi-card">
+        <div class="kpi-header">
+            <span class="kpi-title">Avg AI Engagement</span>
+            <div class="kpi-icon">🤖</div>
+        </div>
+        <div class="kpi-value">{{ stats.avg_ai_hours }}h</div>
+        <span class="kpi-desc">Hours spent weekly using AI tools</span>
+    </div>
+    
+    <div class="kpi-card">
+        <div class="kpi-header">
+            <span class="kpi-title">AI vs Performance r</span>
+            <div class="kpi-icon">📈</div>
+        </div>
+        <div class="kpi-value" style="color: {% if stats.correlation_score_ai > 0 %}#34d399{% else %}#f87171{% endif %}">
+            {{ stats.correlation_score_ai }}
+        </div>
+        <span class="kpi-desc">Correlation (Pearson's coefficient)</span>
+    </div>
+</div>
+
+<!-- Main Table Card -->
+<div class="card">
+    <div class="card-header">
+        <h2 class="card-title">Student Performance and AI Utilization Records</h2>
+        <span class="badge badge-med">Active Dataset: student_ai_data.csv</span>
+    </div>
+    
+    <div class="table-responsive">
+        <table class="data-table">
+            <thead>
+                <tr>
+                    <th>Rank</th>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Prior GPA</th>
+                    <th>AI Hours</th>
+                    <th>Grade</th>
+                    <th>Overall %</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for student in students %}
+                <tr>
+                    <td style="font-weight: 700; color: {% if student.Rank <= 5 %}#fbbf24{% else %}var(--text-secondary){% endif %};">#{{ student.Rank }}</td>
+                    <td style="font-family: monospace; font-weight: 600;">{{ student.Student_ID }}</td>
+                    <td style="font-weight: 500;">{{ student.Name }}</td>
+                    <td>{{ student.Prior_GPA }}</td>
+                    <td>
+                        <span class="badge {% if student.AI_Usage_Hours_Weekly > 12.0 %}badge-high{% elif student.AI_Usage_Hours_Weekly > 4.0 %}badge-med{% else %}badge-low{% endif %}">
+                            {{ student.AI_Usage_Hours_Weekly }} hrs/wk
+                        </span>
+                    </td>
+                    <td><span class="badge {% if student.Grade in ['A+', 'A'] %}badge-high{% elif student.Grade in ['B', 'C'] %}badge-med{% else %}badge-low{% endif %}">{{ student.Grade }}</span></td>
+                    <td style="font-weight: bold; color: {% if student.Final_Exam_Score >= 80 %}#34d399{% elif student.Final_Exam_Score >= 60 %}#fbbf24{% else %}#f87171{% endif %}">
+                        {{ student.Final_Exam_Score }}%
+                    </td>
+                </tr>
+                {% else %}
+                <tr>
+                    <td colspan="7" style="text-align: center; color: var(--text-secondary);">No records found. Click "Regenerate Data" to create samples.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

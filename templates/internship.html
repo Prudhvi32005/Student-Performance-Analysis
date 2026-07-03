@@ -1,0 +1,233 @@
+{% extends "base.html" %}
+
+{% block title %}Internship Roadmap - Student AI Performance Analytics{% endblock %}
+
+{% block content %}
+<div class="top-bar">
+    <div class="page-title">
+        <h1>45-Day Internship Roadmap</h1>
+        <p>Day-by-day project structure, milestones, and documentation log for the internship</p>
+    </div>
+    
+    <div class="top-actions">
+        <a href="https://docs.python.org/" target="_blank" class="btn btn-secondary">
+            Python Docs
+        </a>
+        <a href="https://seaborn.pydata.org/" target="_blank" class="btn btn-secondary">
+            Seaborn Docs
+        </a>
+    </div>
+</div>
+
+<div class="timeline">
+    <!-- Week 1 -->
+    <div class="timeline-item completed">
+        <div class="timeline-marker">✓</div>
+        <div class="timeline-content">
+            <div class="timeline-header">
+                <h3 class="timeline-title">Week 1: Requirements Analysis & DB Architecture</h3>
+                <span class="timeline-days">Days 1 - 7</span>
+            </div>
+            <div class="timeline-body">
+                <p>
+                    Analyzed project requirements, structured the folders, and implemented the SQLite user authentication database schema.
+                </p>
+                <ul class="timeline-tasks">
+                    <li>
+                        <svg style="width:16px;height:16px;" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/>
+                        </svg>
+                        Drafted the project proposal and software requirements specification (SRS).
+                    </li>
+                    <li>
+                        <svg style="width:16px;height:16px;" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/>
+                        </svg>
+                        Initialized project layout structure and configured `requirements.txt`.
+                    </li>
+                    <li>
+                        <svg style="width:16px;height:16px;" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/>
+                        </svg>
+                        Wrote standard password hashing algorithms and schema definitions inside `database.py`.
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- Week 2 -->
+    <div class="timeline-item completed">
+        <div class="timeline-marker">✓</div>
+        <div class="timeline-content">
+            <div class="timeline-header">
+                <h3 class="timeline-title">Week 2: Data Engineering & Simulation</h3>
+                <span class="timeline-days">Days 8 - 14</span>
+            </div>
+            <div class="timeline-body">
+                <p>
+                    Engineered a synthetic student dataset modeling real-world correlations (attendance, study hours, GPA, and AI usage patterns) using NumPy and Pandas.
+                </p>
+                <ul class="timeline-tasks">
+                    <li>
+                        <svg style="width:16px;height:16px;" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/>
+                        </svg>
+                        Researched behavioral literature on student AI integration habits.
+                    </li>
+                    <li>
+                        <svg style="width:16px;height:16px;" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/>
+                        </svg>
+                        Wrote Gaussian noise and quadratic formula functions inside `analyzer.py` to create complex relations.
+                    </li>
+                    <li>
+                        <svg style="width:16px;height:16px;" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/>
+                        </svg>
+                        Saved the generated data to `data/student_ai_data.csv`.
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- Week 3 -->
+    <div class="timeline-item completed">
+        <div class="timeline-marker">✓</div>
+        <div class="timeline-content">
+            <div class="timeline-header">
+                <h3 class="timeline-title">Week 3: Web Server & Authentication</h3>
+                <span class="timeline-days">Days 15 - 21</span>
+            </div>
+            <div class="timeline-body">
+                <p>
+                    Coded the Flask routing engine and connected it to the user database to enable secure login/registration guards.
+                </p>
+                <ul class="timeline-tasks">
+                    <li>
+                        <svg style="width:16px;height:16px;" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/>
+                        </svg>
+                        Built Flask routes for session validation and page redirects inside `app.py`.
+                    </li>
+                    <li>
+                        <svg style="width:16px;height:16px;" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/>
+                        </svg>
+                        Implemented register controls, password matches, and error messages.
+                    </li>
+                    <li>
+                        <svg style="width:16px;height:16px;" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/>
+                        </svg>
+                        Enabled context processors to automatically render user profiles in templates.
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- Week 4 -->
+    <div class="timeline-item completed">
+        <div class="timeline-marker">✓</div>
+        <div class="timeline-content">
+            <div class="timeline-header">
+                <h3 class="timeline-title">Week 4: Statistics & Data Visualizations</h3>
+                <span class="timeline-days">Days 22 - 28</span>
+            </div>
+            <div class="timeline-body">
+                <p>
+                    Developed analytical modules and saved detailed graphs using Matplotlib and Seaborn.
+                </p>
+                <ul class="timeline-tasks">
+                    <li>
+                        <svg style="width:16px;height:16px;" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/>
+                        </svg>
+                        Programmed correlation heatmaps, score distributions, and regplots.
+                    </li>
+                    <li>
+                        <svg style="width:16px;height:16px;" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/>
+                        </svg>
+                        Set Seaborn templates and dark color palettes to match visual UI components.
+                    </li>
+                    <li>
+                        <svg style="width:16px;height:16px;" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/>
+                        </svg>
+                        Extracted stats metrics like Pearson's r and categorized score metrics.
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- Week 5 -->
+    <div class="timeline-item completed">
+        <div class="timeline-marker">✓</div>
+        <div class="timeline-content">
+            <div class="timeline-header">
+                <h3 class="timeline-title">Week 5: UI Glassmorphism & AJAX</h3>
+                <span class="timeline-days">Days 29 - 35</span>
+            </div>
+            <div class="timeline-body">
+                <p>
+                    Stylized frontend templates with premium glassmorphism layouts, glowing components, transitions, and dynamic AJAX refreshes.
+                </p>
+                <ul class="timeline-tasks">
+                    <li>
+                        <svg style="width:16px;height:16px;" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/>
+                        </svg>
+                        Wrote the variables-based stylesheet with layout responsive classes in `style.css`.
+                    </li>
+                    <li>
+                        <svg style="width:16px;height:16px;" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/>
+                        </svg>
+                        Created interactive modals, alerts, and loaders in `dashboard.js`.
+                    </li>
+                    <li>
+                        <svg style="width:16px;height:16px;" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/>
+                        </svg>
+                        Linked HTML template fragments together using Jinja2 inheritance modules.
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- Week 6 -->
+    <div class="timeline-item completed">
+        <div class="timeline-marker">✓</div>
+        <div class="timeline-content">
+            <div class="timeline-header">
+                <h3 class="timeline-title">Week 6: Presentation & Internship Report</h3>
+                <span class="timeline-days">Days 36 - 45</span>
+            </div>
+            <div class="timeline-body">
+                <p>
+                    Completed all documentation and final testing loops. Finalized the internship report outlining AI academic correlation insights.
+                </p>
+                <ul class="timeline-tasks">
+                    <li>
+                        <svg style="width:16px;height:16px;" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/>
+                        </svg>
+                        Wrote comprehensive documentation inside `docs/INTERNSHIP_REPORT.md`.
+                    </li>
+                    <li>
+                        <svg style="width:16px;height:16px;" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/>
+                        </svg>
+                        Ran validation scripts to test registration routines and load charts.
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

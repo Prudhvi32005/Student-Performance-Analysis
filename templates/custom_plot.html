@@ -1,0 +1,132 @@
+{% extends "base.html" %}
+
+{% block title %}Custom Plotter - Student AI Performance Analytics{% endblock %}
+
+{% block content %}
+<div class="top-bar">
+    <div class="page-title">
+        <h1>Customized Visualization Workspace</h1>
+        <p>Select features and plotting models to render dynamic reports on demand</p>
+    </div>
+    
+    <div class="top-actions">
+        <a href="{{ url_for('dashboard') }}" class="btn btn-secondary">
+            <svg style="width:16px;height:16px;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="19" y1="12" x2="5" y2="12"></line>
+                <polyline points="12 19 5 12 12 5"></polyline>
+            </svg>
+            Dashboard
+        </a>
+    </div>
+</div>
+
+<div class="content-grid" style="grid-template-columns: 1fr 2fr;">
+    <!-- Controls Card -->
+    <div class="card" style="height: fit-content;">
+        <div class="card-header">
+            <h2 class="card-title">Plot Configuration</h2>
+        </div>
+        
+        <form action="{{ url_for('custom_plot') }}" method="POST">
+            <!-- Plot Type Selection -->
+            <div class="form-group">
+                <label class="form-label" for="plot_type">Plotting Model</label>
+                <select class="form-control" name="plot_type" id="plot_type" required>
+                    <option value="scatter" {% if selected_type == 'scatter' %}selected{% endif %}>Scatter Plot</option>
+                    <option value="bar" {% if selected_type == 'bar' %}selected{% endif %}>Bar Plot (Averages)</option>
+                    <option value="box" {% if selected_type == 'box' %}selected{% endif %}>Box Plot</option>
+                    <option value="hist" {% if selected_type == 'hist' %}selected{% endif %}>Histogram / Distribution</option>
+                </select>
+            </div>
+            
+            <!-- X Column Selection -->
+            <div class="form-group">
+                <label class="form-label" for="x_column">X-Axis Variable</label>
+                <select class="form-control" name="x_column" id="x_column" required>
+                    <optgroup label="Numerical Features">
+                        {% for col in columns_numeric %}
+                        <option value="{{ col }}" {% if selected_x == col %}selected{% endif %}>{{ col|replace('_', ' ') }}</option>
+                        {% endfor %}
+                    </optgroup>
+                    <optgroup label="Categorical Features">
+                        {% for col in columns_categorical %}
+                        <option value="{{ col }}" {% if selected_x == col %}selected{% endif %}>{{ col|replace('_', ' ') }}</option>
+                        {% endfor %}
+                    </optgroup>
+                </select>
+            </div>
+            
+            <!-- Y Column Selection (Hidden if hist is selected) -->
+            <div class="form-group" id="y_column_group">
+                <label class="form-label" for="y_column">Y-Axis Variable</label>
+                <select class="form-control" name="y_column" id="y_column">
+                    <optgroup label="Numerical Features">
+                        {% for col in columns_numeric %}
+                        <option value="{{ col }}" {% if selected_y == col or (not selected_y and col == 'Final_Exam_Score') %}selected{% endif %}>{{ col|replace('_', ' ') }}</option>
+                        {% endfor %}
+                    </optgroup>
+                    <optgroup label="Categorical Features">
+                        {% for col in columns_categorical %}
+                        <option value="{{ col }}" {% if selected_y == col %}selected{% endif %}>{{ col|replace('_', ' ') }}</option>
+                        {% endfor %}
+                    </optgroup>
+                </select>
+            </div>
+            
+            <button type="submit" class="btn btn-primary" style="width: 100%; justify-content: center; margin-top: 1.5rem;">
+                <svg style="width:16px;height:16px;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+                </svg>
+                Generate Plot
+            </button>
+        </form>
+    </div>
+    
+    <!-- Result Card -->
+    <div class="card">
+        <div class="card-header">
+            <h2 class="card-title">Visualization Preview</h2>
+            {% if selected_type %}
+            <span class="badge badge-med" style="text-transform: uppercase;">{{ selected_type }}</span>
+            {% endif %}
+        </div>
+        
+        <div class="plot-container" style="min-height: 380px; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center;">
+            {% if plot_data %}
+            <img class="plot-img" src="data:image/png;base64,{{ plot_data }}" alt="Custom User Visualization">
+            {% else %}
+            <div style="padding: 3rem; color: var(--text-secondary);">
+                <div style="font-size: 3rem; margin-bottom: 1rem;">📊</div>
+                <h3 style="font-weight: 700; color: var(--text-primary); margin-bottom: 0.5rem;">No Chart Rendered</h3>
+                <p style="font-size: 0.9rem; max-width: 320px; margin: 0 auto; color: var(--text-muted);">
+                    Select the coordinate parameters and click "Generate Plot" to render a customized Seaborn visualization.
+                </p>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const plotTypeSelect = document.getElementById('plot_type');
+        const yColGroup = document.getElementById('y_column_group');
+        const yColSelect = document.getElementById('y_column');
+        
+        function toggleYField() {
+            if (plotTypeSelect.value === 'hist') {
+                yColGroup.style.display = 'none';
+                yColSelect.removeAttribute('required');
+            } else {
+                yColGroup.style.display = 'block';
+                yColSelect.setAttribute('required', 'required');
+            }
+        }
+        
+        plotTypeSelect.addEventListener('change', toggleYField);
+        toggleYField(); // Trigger initial execution
+    });
+</script>
+{% endblock %}
