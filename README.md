@@ -2,6 +2,13 @@
 
 A premium, dark-themed glassmorphic web dashboard built with Flask and Python data science packages. It simulates and analyzes student academic outcomes in relation to their weekly Generative AI tools utilization patterns (coding assistance, concepts explanation, summaries, etc.), and includes a generic dynamic dataset upload/analysis workspace.
 
+# AI-Assisted Student Performance Analytics Dashboard
+A premium, dark-themed glassmorphic web dashboard built with Flask and Python data science packages. It simulates and analyzes student academic outcomes in relation to their weekly Generative AI tools utilization patterns (coding assistance, concepts explanation, summaries, etc.), and includes a generic dynamic dataset upload/analysis workspace.
+
+---
+
+### 🌐 [Live Demo](https://student-performance-analysis-k5uc.onrender.com)
+
 ---
 
 ## 🌟 Key Features
